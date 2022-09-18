@@ -3,14 +3,7 @@ module.exports = {
 	content: ['./index.html'],
 	theme: {
 		fontFamily: {
-			poppins: 'Poppins, sans-serif',
 			ubuntu: 'Ubuntu, sans-serif',
-		},
-		screens: {
-			small: '640px',
-			medium: '760px',
-			large: '1024px',
-			extralarge: '1280px',
 		},
 		extend: {
 			colors: {
