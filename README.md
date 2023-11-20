@@ -1,4 +1,4 @@
-# Mario Club Website
+# Mario Club
 
 ## Description
 
