@@ -21,11 +21,12 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Fix permissions
-        run: |
-          chmod -c -R +rX "_site/" | while read line; do
-          echo "::warning title=Invalid file permissions automatically fixed::$line"
-          done
+      - name: Cache Directory
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./dist
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
 
       - name: Upload Production Artifact
         uses: actions/upload-pages-artifact@v2
@@ -48,6 +49,12 @@ jobs:
       url: https://mario-club.s3.co.ke
 
     steps:
+      - name: Download Production Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: "./dist"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
