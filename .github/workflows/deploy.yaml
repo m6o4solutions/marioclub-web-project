@@ -1,4 +1,4 @@
-name: Build and Deploy to Firebase Hosting
+name: Build and Deploy to GitHub Pages
 on:
   pull_request:
     branches: main
@@ -25,9 +25,17 @@ jobs:
           path: dist
 
   deploy:
-    name: Deploy to Firebase Hosting
+    name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout Repository
@@ -39,9 +47,6 @@ jobs:
           name: dist
           path: dist
 
-      - name: Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: deploy
+        id: deployment
+        uses: actions/deploy-pages@v2
