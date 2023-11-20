@@ -21,18 +21,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Cache Directory
-        uses: actions/cache@v3
-        with:
-          path: |
-            ./dist
-          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-
       - name: Upload Production Artifact
         uses: actions/upload-pages-artifact@v2
         with:
           name: dist
-          path: "./dist"
+          path: "./dist/"
 
   deploy:
     name: Deploy to GitHub Pages
@@ -53,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
-          path: "./dist"
+          path: "./dist/"
 
       - name: Deploy to GitHub Pages
         id: deployment
