@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: dist
+          path: "./dist"
 
   deploy:
     name: Deploy to GitHub Pages
@@ -30,12 +30,13 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      contents: read
       pages: write
       id-token: write
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://mario-club.s3.co.ke
 
     steps:
       - name: Checkout Repository
@@ -45,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
-          path: dist
+          path: "./dist"
 
       - name: deploy
         id: deployment
