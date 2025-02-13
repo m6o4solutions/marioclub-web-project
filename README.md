@@ -11,7 +11,6 @@ The repetitive process of building and deploying the project to production is au
 1. HTML
 2. Tailwind
 3. ViteJS
-4. Netlify
 
 ## Using The Repository
 
